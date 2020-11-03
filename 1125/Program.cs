@@ -8,6 +8,8 @@ namespace _1125
         {
             Cat cat = new Cat("Пейн", new DateTime(2014, 03, 31));
             Console.WriteLine($"Коту по имени {cat.Name} уже {cat.GetAge()} лет");
+            cat.HungryStatus = 150;
+            Console.ReadLine();
         }
     }
 }
