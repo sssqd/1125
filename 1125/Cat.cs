@@ -76,7 +76,7 @@ namespace _1125
             else if (HungryStatus > 90)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Кот недавно поел ");
+                Console.WriteLine($"Кот недавно поел");
             }
             Console.ResetColor();
         }
