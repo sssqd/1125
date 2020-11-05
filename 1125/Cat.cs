@@ -30,25 +30,7 @@ namespace _1125
         {
             return (DateTime.Today - BirthDay).Days / 365;
         }
-        public byte HungryStatus
-        {
-            get { return _hungryStatus; }
-            set
-            {
-                if (value < 0)
-                {
-                    _hungryStatus = 0;
-                }
-                else if (value > 100)
-                {
-                    _hungryStatus = 100;
-                }
-                else
-                {
-                    _hungryStatus = value;
-                }
-            }
-        }
+       
         public void GetStatus()
         {
             Console.WriteLine(Name);
@@ -84,8 +66,28 @@ namespace _1125
         {
             await Task.Delay(1000);
             HungryStatus -= 10;
-            GetStatus();
             await LifeCircle();
+        }
+        public void Feed()
+        {
+            HungryStatus = 100;
+        }
+        public event EventHandler HungryStatusChanged;
+        public byte HungryStatus
+        {
+            get { return _hungryStatus; }
+            set
+            {
+                if (value < 0)
+                    _hungryStatus = 0;
+                else if (value > 100)
+                    _hungryStatus = 100;
+                else
+                    _hungryStatus = value;
+                if (_hungryStatus != value)
+                    HungryStatusChanged?.Invoke(this, null);
+
+            }
         }
     }
 }
