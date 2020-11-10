@@ -19,6 +19,13 @@ namespace _1125
             cats.Add(cat);
             cat.HungryStatusChanged += Cat_HungryStatusChanged;
         }
+        public int CatsCount
+        {
+            get
+            {
+                return cats.Count;
+            }
+        }
         private void Cat_HungryStatusChanged(object sender, EventArgs e)
         {
             var cat = (Cat)sender;
@@ -33,8 +40,27 @@ namespace _1125
                     FoodResourse = 0;
                 }
                 cat.Feed(needFood);
-                Console.WriteLine($"Покормлена кошка: {cat.Name}\n Остаток еды в вольере: {FoodResourse}");
+                PrintStatus();
             }
+        }
+        public void PrintStatus()
+        {
+
+            int leftPosition = Console.CursorLeft;
+            int topPosition = Console.CursorTop;
+
+            for (int i = 0; i < cats.Count; i++)
+            {
+                string message = cats[i].GetStatus("");
+                int color = Convert.ToInt32(message.Substring(0, 1));
+                Console.SetCursorPosition(0, i);
+                Console.ForegroundColor = (ConsoleColor)color;
+                Console.Write(message.Substring(2).Trim().PadRight(50));
+                Console.ResetColor();
+            }
+            Console.SetCursorPosition(0, CatsCount);
+            Console.Write($"Еды в вольере: + {FoodResourse}".PadRight(50));
+            Console.SetCursorPosition(leftPosition, topPosition);
         }
     }
 }
