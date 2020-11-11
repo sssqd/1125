@@ -90,5 +90,9 @@ namespace _1125
             HungryStatus -= 10;
             await LifeCircle();
         }
+        public int a = 10;
+        public int b = 40;
+        public int c = 70;
+        public int d = 90;
     }
 }
