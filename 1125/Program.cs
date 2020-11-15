@@ -14,7 +14,7 @@ namespace _1125
             catHouse.AddCat(cat);
             catHouse.AddCat(cat2);
             Console.SetCursorPosition(0, catHouse.CatsCount + 1);
-            Console.ReadLine();
+            CommandCenter CC = new CommandCenter(catHouse);
         }
     }
 }

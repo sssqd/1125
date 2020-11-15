@@ -7,7 +7,7 @@ namespace _1125
 {
     public class Cat
     {
-        int _hungryStatus;
+        sbyte _hungryStatus;
         public event EventHandler HungryStatusChanged;
         public Cat(string name, DateTime birthday)
         {
@@ -32,26 +32,31 @@ namespace _1125
         {
             return (DateTime.Today - BirthDay).Days / 365;
         }
-        public byte HungryStatus
+        public sbyte HungryStatus
         {
-            get { return (byte)_hungryStatus; }
+            get { return _hungryStatus; }
             set
             {
-                int newStatus = 0;
-                if (value < 0)
-                    newStatus = 0;
-                else if (value > 100)
-                    newStatus = value;
-                if (newStatus != _hungryStatus)
+                sbyte status = value;
+                if (status < 0)
                 {
-                    _hungryStatus = newStatus;
-                    HungryStatusChanged?.Invoke(this, null);
+                    status = 0;
+                }
+                else if (status > 100)
+                {
+                    status = 100;
                 }
                 else
-                    _hungryStatus = 0;
+                    _hungryStatus = value;
+                if (_hungryStatus < status)
+                {
+                    HungryStatusChanged?.Invoke(this, null);
+                }
+                _hungryStatus = status;
             }
         }
-        public void Feed(byte needFood)
+
+        public void Feed(sbyte needFood)
         {
             HungryStatus += needFood;
         }
@@ -90,9 +95,5 @@ namespace _1125
             HungryStatus -= 10;
             await LifeCircle();
         }
-        public int a = 10;
-        public int b = 40;
-        public int c = 70;
-        public int d = 90;
     }
 }

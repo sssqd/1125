@@ -7,17 +7,14 @@ namespace _1125
     class CommandCenter
     {
         public int eat;
-        public CommandCenter(CatSmartHouse CatHouse)
+        public CommandCenter(CatSmartHouse catHouse)
         {
-            CatSmartHouse = CatHouse;
-            WaitCommand();
+            CatSmartHouse = catHouse;
+            WaitCommand(CatSmartHouse);
         }
-        public CommandCenter()
-        {
-        }
-        private void WaitCommand() { }
-        public CatSmartHouse CatSmartHouse { get; set; }
-        public void WaitCommand(Cat cat, CatSmartHouse CatHouse)
+        public CatSmartHouse CatSmartHouse
+        { get; set; }
+        public void WaitCommand(CatSmartHouse CatHouse)
         {
             string command = "";
             while (command != "exit")
@@ -52,17 +49,11 @@ namespace _1125
                 {
                     if (array[1] == "+")
                     {
-                        cat.a -= Convert.ToInt32(array[2]);
-                        cat.b -= Convert.ToInt32(array[2]);
-                        cat.c -= Convert.ToInt32(array[2]);
-                        cat.d -= Convert.ToInt32(array[2]);
+                        CatHouse.hangryLimit -= Convert.ToInt32(array[2]);
                     }
                     else if (array[1] == "-")
                     {
-                        cat.a += Convert.ToInt32(array[2]);
-                        cat.b += Convert.ToInt32(array[2]);
-                        cat.c += Convert.ToInt32(array[2]);
-                        cat.d += Convert.ToInt32(array[2]);
+                        CatHouse.hangryLimit += Convert.ToInt32(array[2]);
                     }
                 }
             }
